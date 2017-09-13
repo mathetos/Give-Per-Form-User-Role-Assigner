@@ -23,7 +23,6 @@ class Give_Metabox_Setting_Fields {
 		$this->prefix = '_give_';
 
 		add_filter( 'give_metabox_form_data_settings', array( $this, 'setup_setting' ), 999 );
-		//add_action( 'admin_footer', array( $this, 'admin_js' ) );
 	}
 
 	function setup_setting( $settings ) {
@@ -51,27 +50,6 @@ class Give_Metabox_Setting_Fields {
 		return $settings;
 	}
 
-	/**
-	 * Setting JS.
-	 *
-	 * @access public
-	 */
-	public function admin_js() {
-		$screen = get_current_screen();
-
-		if ( 'give_forms' !== $screen->post_type || 'edit' !== $screen->parent_base ) {
-			return;
-		}
-
-		?>
-		<script>
-			jQuery(document).ready(function () {
-				jQuery('.give-datepicker').datepicker();
-			});
-		</script>
-		<?php
-	}
-
 
 	/**
 	 * Donor Assigned User Role field.
@@ -82,9 +60,6 @@ class Give_Metabox_Setting_Fields {
 	 */
 	function user_role_field( $field ) {
 		global $thepostid;
-
-		// Datepicker script.
-		//wp_enqueue_script( 'jquery-ui-datepicker' );
 
 		$field['value'] = give_get_field_value( $field, $thepostid );
 
